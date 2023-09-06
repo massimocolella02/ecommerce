@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,9 +28,9 @@ class ProductController extends Controller
      */
     public function create()
     {   
-        $userId = Auth::id();
+        $categories = Category::all();
 
-        return view('products.create', compact('userId'));
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -40,7 +41,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create($request->all());
+        $product = new Product();
+        $product->user_id = Auth::id();
+        $product->name = $request['name'];
+        $product->brand = $request['brand'];
+        $product->price = $request['price'];
+        $product->description = $request['description'];
+        $product->color = $request['color'];
+        $product->save();
+        
+        $product->categories()->attach($request['category']);
 
         return redirect()->route('products.index');
     }
