@@ -3,9 +3,17 @@
     <div class="container">
         <form action="{{route('products.store')}}" method="POST">
             @csrf
-            <div class="mb-3 d-none">
-                <input type="number" class="form-control" id="nameproduct" name="user_id" value="{{$userId}}">
+
+            <div class="mb-3">
+                <label for="nameproduct" class="form-label">Categoria prodotto</label>
+                <select class="form-select" name="category">
+                    <option></option>
+                    @foreach ($categories as $elem)
+                    <option value="{{$elem->id}}">{{$elem->name}}</option>
+                    @endforeach
+                </select>
             </div>
+
 
             <div class="mb-3">
               <label for="nameproduct" class="form-label">Nome prodotto</label>
@@ -14,7 +22,7 @@
 
             <div class="mb-3">
                 <label for="brandproduct" class="form-label">Brand prodotto</label>
-                <input type="text" class="form-control" id="nameproduct" name="brand">
+                <input type="text" class="form-control" id="brandproduct" name="brand">
             </div>
 
             <div class="mb-3">
