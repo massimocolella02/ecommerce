@@ -7,7 +7,11 @@
             <div class="mb-3">
                 <label for="nameproduct" class="form-label">Categoria prodotto</label>
                 <select class="form-select" name="category">
+<<<<<<< HEAD
                     <option></option>
+=======
+                    <option selected></option>
+>>>>>>> c691522ccd74bb98191ae4ba5dc32b36280ad42e
                     @foreach ($categories as $elem)
                     <option value="{{$elem->id}}">{{$elem->name}}</option>
                     @endforeach
